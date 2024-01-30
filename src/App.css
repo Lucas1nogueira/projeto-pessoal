@@ -1,77 +1,39 @@
 @charset "UTF-8";
 
-@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300&family=Kanit:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=Share+Tech&display=swap');
+
+* {
+  overflow-x: hidden;
+}
 
 .App {
   width: 100vw;
-  height: 150vh;
-  font-family: Barlow;
-  background-image: url("./fundo.png");
-  background-size: cover;
-  animation: App-fundo-animado 20s infinite;
-}
-
-@keyframes App-fundo-animado {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 50% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-muda-cor infinite 2s;
-  }
-}
-
-@keyframes App-logo-muda-cor {
-  0% {
-    filter: invert(100%);
-  }
-  50% {
-    filter: invert(75%);
-  }
-  100% {
-    filter: invert(100%);
-  }
+  font-family: 'Fira Code', monospace;
+  background-color: #000;
+  color: #fff;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #000;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  font-family: Kanit;
+  font-family: 'Share Tech', sans-serif;
   align-items: center;
   align-content: center;
   justify-content: center;
-  color: white;
   font-size: large;
-  border-bottom: 3px solid #abb5e5;
+  border-bottom: 3px solid #06ad00;
 }
 
-.App-header h1 {
-  animation: App-header-titulo-animado infinite alternate 10s;
+.App-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-@keyframes App-header-titulo-animado {
-  0% {
-    text-shadow: #ffffff 1px 1px 1px;
-  }
-  50% {
-    text-shadow: #ffffff 1px 1px 20px;
-  }
-  100% {
-    text-shadow: #ffffff 1px 1px 1px;
-  }
-}
-
-.App-botao-menu {
+.App-menu-button {
   display: inline;
   width: 25px;
   height: 25px;
@@ -80,7 +42,7 @@
   transition: filter 1s;
 }
 
-.App-botao-menu:hover {
+.App-menu-button:hover {
   filter: invert(100%);
   cursor: pointer;
 }
@@ -88,7 +50,6 @@
 .App-logo {
   height: 50px;
   pointer-events: none;
-  filter: invert(100%);
 }
 
 .App-header div {
@@ -100,47 +61,82 @@
 
 .App-header div h1 {
   padding-left: 10px;
+  background: linear-gradient(90deg, #fff, #c2c2c2, #fff);
+  background-repeat: repeat-x;
+  background-clip: text;
+  color: transparent;
+  animation: shining 5s ease-in-out infinite;
+  background-size: 80% 100%;
 }
 
-#Menu-lateral {
+@keyframes shining {
+  0% {
+    background-position: -200%;
+  }
+  50%{
+    background-position: 200%;
+  }
+  100% {
+    background-position: -200%;
+  }
+}
+
+.Menu-background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0000008f;
+  animation-name: menu-background-fadein;
+  animation-duration: 0.5s;
+}
+
+@keyframes menu-background-fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}
+
+.Side-menu {
   position: fixed;
-  color: #ffffff;
-  background-color: #282c34;
   width: 20%;
-  height: 100%;
   min-width: 200px;
-  animation-name: entrada;
+  height: 100%;
+  border-right: 2px solid #06ad00;
+  background-color: #000;
+  animation-name: open-menu;
   animation-duration: 0.5s;
   z-index: 1;
 }
 
-#Menu-lateral ul {
+.Side-menu ul {
   list-style-type: none;
   text-align: left;
   padding-top: 50px;
 }
 
-#Menu-lateral ul li a {
-  color: #ffffff;
+.Side-menu ul li a {
   text-decoration: none;
-  line-height: 50px;
+  color: #fff;
 }
 
-#Menu-lateral img {
-  width: 30px;
+.Side-menu img {
+  width: 23px;
+  height: 25px;
   float: right;
   padding-top: 40px;
   padding-right: 30px;
-  filter: invert(100%);
   cursor: pointer;
   transition: filter 1s;
 }
 
-#Menu-lateral img:hover {
-  filter: invert(0);
+.Side-menu img:hover {
+  filter: invert(100);
 }
 
-@keyframes entrada {
+@keyframes open-menu {
   from {
     opacity: 0;
     transform: translateX(-100%);
@@ -151,24 +147,29 @@
   }
 }
 
-.Conteudo-inicio {
-  font-size: large;
-  margin-left: 20px;
-  margin-top: 20px;
-  padding: 20px;
-  text-shadow: #ffffff 1px 1px 5px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 20px;
-  width: 70%;
-  height: max-content;
+.Side-menu-close {
+  animation-name: close-menu;
+  animation-duration: 0.5s;
 }
 
-.Conteudo-inicio ul {
+.Main-content {
+  float: left;
+  width: 70%;
+  height: max-content;
+  margin: 20px;
+  margin-right: 0;
+  margin-bottom: 60px;
+  padding: 20px;
+  background-color: #091300;
+  border: 2px solid #06ad00;
+  font-size: large;
+}
+
+.Main-content ul {
   list-style: none;
 }
 
-.Conteudo-inicio ul li {
+.Main-content ul li {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -176,58 +177,98 @@
   padding: 10px;
 }
 
-.Conteudo-inicio ul li img {
+.Main-content ul li img {
   width: 30px;
-  border: 2px solid #abb5e58c;
-  border-radius: 5px;
+  border: 1px solid #06ad00;
+  border-radius: 3px;
   margin-right: 10px;
   transition: opacity 1s;
 }
 
-.Conteudo-inicio ul li img:hover {
+.Main-content ul li img:hover {
   opacity: 50%;
 }
 
-.Conteudo-inicio .perfil {
+.Main-content .gitHub-profile {
   display: flex;
   width: 200px;
   height: 30px;
   flex-direction: row;
   align-items: center;
   justify-content: left;
-  border: rgba(0, 0, 0, 0.1) solid 2px;
-  border-radius: 10px;
   margin-top: 30px;
+  border: 2px solid #fff;
+  border-radius: 10px;
   padding: 10px;
-  background-color: #282c34;
+  background-color: #000;
+  font-size: medium;
   transition: background-color 0.5s;
+  text-decoration: none;
 }
 
-.Conteudo-inicio .perfil img {
+.Main-content .gitHub-profile img {
   width: 30px;
   filter: invert(100%);
 }
 
-.Conteudo-inicio .perfil a {
-  text-decoration: none;
-  font-family: Kanit;
-  width: 200px;
+.Main-content .gitHub-profile a {
+  font-family: 'Share Tech', sans-serif;
   padding-left: 10px;
-  color: #ffffff;
+  color: #fff;
 }
 
-.Conteudo-inicio .perfil:hover {
-  background-color: #2fb345;
+.Main-content .gitHub-profile:hover {
+  background-color: #006e12;
 }
 
-@media (max-width: 1024px) {
-  #Menu-lateral {
-    width: 30%;
+.Aside {
+  float: right;
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  margin-right: 40px;
+  margin-bottom: 60px;
+  padding: 20px;
+  background-color: #091300;
+  border: 2px solid #06ad00;
+}
+
+.Footer {
+  position: fixed;
+  width: 100%;
+  height: min-content;
+  bottom: 0;
+  background-color: #000000dc;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.Footer img {
+  width: 20px;
+  padding-right: 5px;
+}
+
+.Footer p {
+  font-size: small;
+}
+
+@media (max-width: 1280px) {
+  .Main-content {
+    float: none;
+    width: 90%;
+    margin-bottom: 20px;
+  }
+  .Aside {
+    float: none;
+    width: 90%;
+    height: max-content;
   }
 }
 
 @media (max-width: 540px) {
-  #Menu-lateral {
+  .Side-menu {
     width: 40%;
   }
 }
@@ -236,7 +277,7 @@
   .App-header h1 {
     font-size: 30px;
   }
-  #Menu-lateral {
+  .Side-menu {
     width: 210px;
   }
 }
@@ -249,16 +290,16 @@
     height: 35px;
     width: 35px;
   }
-  .App-botao-menu {
+  .App-menu-button {
     height: 20px;
     width: 20px;
     margin-left: 10px;
     margin-right: 10px;
   }
-  .Conteudo-inicio {
+  .Main-content {
     font-size: medium;
   }
-  .Conteudo-inicio .perfil {
+  .Main-content .gitHub-profile {
     max-width: 170px;
   }
 }

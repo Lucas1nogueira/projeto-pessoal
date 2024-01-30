@@ -1,19 +1,22 @@
-import React from 'react';
-import menuImg from './menu.png';
-import projetoImg from './projeto.png';
+import React from "react";
+import menuIcon from "./menu-icon.png";
+import logo from "./logo.png";
 
 function Header(props) {
-
-    return (
-        <header className="App-header">
-            <img src={menuImg} className="App-botao-menu" alt="menu" onClick={props.abrirMenu} />
-            <div>
-                <img src={projetoImg} className="App-logo" alt="logo" />
-                <h1>Projeto Pessoal</h1>
-            </div>
-        </header>
-    )
-
+  return (
+    <header className="App-header">
+      <img
+        src={menuIcon}
+        className="App-menu-button"
+        alt="menu"
+        onClick={props.openMenu}
+      />
+      <div className="App-title">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1>PROJETO PESSOAL</h1>
+      </div>
+    </header>
+  );
 }
 
 export default Header;

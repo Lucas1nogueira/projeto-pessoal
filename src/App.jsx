@@ -1,25 +1,29 @@
 import { useState } from "react";
 import "./App.css";
 import Header from "./Header";
-import MenuLateral from "./MenuLateral";
-import ConteudoInicio from "./ConteudoInicio";
+import SideMenu from "./SideMenu";
+import MainContent from "./MainContent";
+import Aside from "./Aside";
+import Footer from "./Footer";
 
 function App() {
   const [menu, setMenu] = useState(false);
 
-  function abrirMenuLateral() {
+  function openSideMenu() {
     setMenu(true);
   }
 
-  function fecharMenuLateral() {
+  function closeSideMenu() {
     setMenu(false);
   }
 
   return (
     <div className="App">
-      {menu && <MenuLateral fecharMenu={fecharMenuLateral} />}
-      <Header abrirMenu={abrirMenuLateral} />
-      <ConteudoInicio />
+      {menu && <SideMenu menuStatus={menu} closeMenu={closeSideMenu} />}
+      <Header openMenu={openSideMenu} />
+      <MainContent />
+      <Aside />
+      <Footer />
     </div>
   );
 }
